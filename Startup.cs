@@ -35,6 +35,8 @@ namespace MyULibrary_API
             services.AddDbContext<MyULibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("urlService")));
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IGenreRepository, GenresRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyULibrary_API", Version = "v1" });
