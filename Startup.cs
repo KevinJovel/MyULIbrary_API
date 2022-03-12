@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MyULibrary_API.Interfaces;
 using MyULibrary_API.Models;
+using MyULibrary_API.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,8 @@ namespace MyULibrary_API
 
             services.AddControllers();
             services.AddDbContext<MyULibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("urlService")));
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IGenreRepository, GenresRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyULibrary_API", Version = "v1" });
