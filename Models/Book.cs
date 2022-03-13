@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace MyULibrary_API.Models
 {
@@ -15,8 +16,10 @@ namespace MyULibrary_API.Models
         public int PublishedYear { get; set; }
         public int Stock { get; set; }
         [ForeignKey("GenreId")]
+        [JsonIgnore]
         public Genre Genre { get; set; }
         public int GenreId { get; set; }
+        [JsonIgnore]
         public ICollection<LoanHistory> LoanHistory { get; set; }
     }
 }

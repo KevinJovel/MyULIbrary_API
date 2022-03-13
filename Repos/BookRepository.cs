@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyULibrary_API.DTOs;
 using MyULibrary_API.Interfaces;
 using MyULibrary_API.Models;
 using System.Collections.Generic;
@@ -32,9 +33,22 @@ namespace MyULibrary_API.Repos
             return book;
         }
 
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<BookDTo>> GetAllBooks()
         {
-            return await _ctx.Books.ToListAsync();
+            List<BookDTo> lista = await (from book in _ctx.Books
+                                        join genre in _ctx.Genres
+                                        on book.GenreId equals genre.GenreId
+                                       select new BookDTo
+                                       {
+                                           BookID = book.BookID,
+                                           GenreId = genre.GenreId,
+                                           Author = book.Author,
+                                           GenreName = genre.Name,
+                                           PublishedYear = book.PublishedYear,
+                                           Stock = book.Stock,
+                                           Title = book.Title,
+                                       }).ToListAsync();
+            return lista;
         }
         public async Task<Book> GetBookById(int id)
         {

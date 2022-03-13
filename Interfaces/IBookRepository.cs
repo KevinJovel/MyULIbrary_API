@@ -1,4 +1,5 @@
-﻿using MyULibrary_API.Models;
+﻿using MyULibrary_API.DTOs;
+using MyULibrary_API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,7 +7,7 @@ namespace MyULibrary_API.Interfaces
 {
     public interface IBookRepository
     {
-        Task<IEnumerable<Book>> GetAllBooks();
+        Task<IEnumerable<BookDTo>> GetAllBooks();
         Task<Book> GetBookById(int id);
         Task<Book> createBook(Book book);
         Task<Book> updateBook(Book book);

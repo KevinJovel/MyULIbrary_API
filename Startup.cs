@@ -52,6 +52,11 @@ namespace MyULibrary_API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyULibrary_API v1"));
             }
+            app.UseCors(option => {
+                option.AllowAnyHeader();
+                option.AllowAnyMethod();
+                option.AllowAnyOrigin();
+            });
 
             app.UseHttpsRedirection();
 

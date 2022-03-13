@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyULibrary_API.DTOs;
 using MyULibrary_API.Interfaces;
 using MyULibrary_API.Models;
 using System.Collections.Generic;
@@ -32,9 +33,21 @@ namespace MyULibrary_API.Repos
             return user;
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers()
+        public async Task<IEnumerable<UserDTo>> GetAllUsers()
         {
-            return await _ctx.Users.ToListAsync();
+            List<UserDTo> lista = await (from user in _ctx.Users
+                                         join role in _ctx.Roles
+                                         on user.RoleId equals role.RoleId
+                                         select new UserDTo
+                                         {
+                                             UserId = user.UserId,
+                                             RoleId = role.RoleId,
+                                             Email = user.Email,
+                                             FirstName = user.FirstName,
+                                             LastName = user.LastName,
+                                             RoleName = role.RoleName,
+                                         }).ToListAsync();
+            return lista;
         }
 
         public async Task<User> GetUserById(int id)

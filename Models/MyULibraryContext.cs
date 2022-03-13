@@ -21,5 +21,13 @@ namespace MyULibrary_API.Models
                 optionsBuilder.UseSqlServer("Data Source=DESKTOP-6301TK6\\SQLEXPRESS;Initial Catalog=MyULibraryDB;Integrated Security=True");
             }
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<LoanHistory>().HasKey(table => new {
+                table.BookId,
+                table.UserId,
+                table.LoanDate
+            });
+        }
     }
 }
