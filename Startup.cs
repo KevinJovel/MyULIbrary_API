@@ -32,12 +32,13 @@ namespace MyULibrary_API
         {
 
             services.AddControllers();
-            services.AddDbContext<MyULibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("urlService")));
+            services.AddDbContext<MyULibraryContext>(options => options.UseSqlServer("Server=tcp:my-ulibrarydb.database.windows.net,1433;Initial Catalog=my-ulobrarydb;Persist Security Info=False;User ID=crack;Password=Root14003$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IGenreRepository, GenresRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ILoansRepository, LoansRepository>();
+            services.AddSwaggerGen();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyULibrary_API", Version = "v1" });
@@ -50,20 +51,24 @@ namespace MyULibrary_API
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyULibrary_API v1"));
             }
+            else
+            {
+                app.UseHsts();
+            }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyULibrary_API v1"));
             app.UseCors(option => {
                 option.AllowAnyHeader();
                 option.AllowAnyMethod();
                 option.AllowAnyOrigin();
             });
-
-            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

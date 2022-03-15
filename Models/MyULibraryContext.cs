@@ -18,7 +18,7 @@ namespace MyULibrary_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-6301TK6\\SQLEXPRESS;Initial Catalog=MyULibraryDB;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Server=tcp:my-ulibrarydb.database.windows.net,1433;Initial Catalog=my-ulobrarydb;Persist Security Info=False;User ID=crack;Password=Root14003$;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
         protected override void OnModelCreating(ModelBuilder builder)
