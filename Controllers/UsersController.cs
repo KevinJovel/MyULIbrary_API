@@ -58,7 +58,7 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> createBanco([FromBody] User User)
+        public async Task<ActionResult> createUser([FromBody] User User)
         {
             try
             {
@@ -71,11 +71,23 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> updateBanco([FromBody] User User)
+        public async Task<ActionResult> updateUser([FromBody] User User)
         {
             try
             {
                 return Ok(await _User.updateUser(User));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+        [HttpGet("login/{user}/{pass}")]
+        public async Task<ActionResult> loginUser(string user, string pass)
+        {
+            try
+            {
+                return Ok(await _User.login(user, pass));
             }
             catch (Exception ex)
             {

@@ -5,6 +5,9 @@ using MyULibrary_API.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Text;
+using System;
 
 namespace MyULibrary_API.Repos
 {
@@ -20,6 +23,13 @@ namespace MyULibrary_API.Repos
 
         public async Task<User> createUser(User user)
         {
+            //cifrar contraseña
+            SHA256Managed sha = new SHA256Managed();
+            string pass = user.Password;
+            byte[] dataNoEncrypted = Encoding.Default.GetBytes(pass);
+            byte[] dataEncrypted = sha.ComputeHash(dataNoEncrypted);
+            string keyEncrypted = BitConverter.ToString(dataEncrypted).Replace("-", "");
+            user.Password = keyEncrypted;
             await _ctx.Users.AddAsync(user);
             await _ctx.SaveChangesAsync();
             return user;
@@ -53,6 +63,21 @@ namespace MyULibrary_API.Repos
         public async Task<User> GetUserById(int id)
         {
             return await _ctx.Users.Where(x => x.UserId == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<User> login(string user, string pass)
+        {
+            SHA256Managed sha = new SHA256Managed();
+            byte[] dataNoEncrypted = Encoding.Default.GetBytes(pass);
+            byte[] dataEncrypted = sha.ComputeHash(dataNoEncrypted);
+            string keyEncrypted = BitConverter.ToString(dataEncrypted).Replace("-", "");
+            var logUser=  await _ctx.Users.Where(x => x.Password == keyEncrypted && x.UserName == user).FirstOrDefaultAsync();
+            if (logUser != null) {
+                return logUser;
+            }
+            else {
+                return null;
+            }
         }
 
         public async Task<User> updateUser(User user)

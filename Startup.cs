@@ -37,6 +37,7 @@ namespace MyULibrary_API
             services.AddScoped<IGenreRepository, GenresRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ILoansRepository, LoansRepository>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyULibrary_API", Version = "v1" });

@@ -23,6 +23,6 @@ namespace MyULibrary_API.Models
         [Key]
         [Column(Order = 3)]
         public DateTime LoanDate { get; set; }
-        public DateTime ReturnDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

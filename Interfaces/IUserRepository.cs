@@ -12,5 +12,7 @@ namespace MyULibrary_API.Interfaces
         Task<User> createUser(User user);
         Task<User> updateUser(User user);
         Task<User> deleteUser(int id);
+        //Login 
+        Task<User> login(string user, string pass);
     }
 }

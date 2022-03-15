@@ -58,7 +58,7 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> createBanco([FromBody] Genre genre)
+        public async Task<ActionResult> createGenre([FromBody] Genre genre)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> updateBanco([FromBody] Genre genre)
+        public async Task<ActionResult> updateGenre([FromBody] Genre genre)
         {
             try
             {

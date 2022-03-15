@@ -58,7 +58,7 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> createBanco([FromBody] Role Role)
+        public async Task<ActionResult> createRole([FromBody] Role Role)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace MyULibrary_API.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> updateBanco([FromBody] Role Role)
+        public async Task<ActionResult> updateRole([FromBody] Role Role)
         {
             try
             {

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyULibrary_API.Models;
 
 namespace MyULibrary_API.Migrations
 {
     [DbContext(typeof(MyULibraryContext))]
-    partial class MyULibraryContextModelSnapshot : ModelSnapshot
+    [Migration("20220314004325_return date nulleable")]
+    partial class returndatenulleable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
